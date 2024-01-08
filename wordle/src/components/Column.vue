@@ -10,4 +10,13 @@
 
 <style lang="scss">
 
+    .column {
+        background-color: gold;
+        width: 2rem;
+        height: 2rem;
+
+        .column__input {
+        }   
+    }
+
 </style>
