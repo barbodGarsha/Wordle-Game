@@ -1,10 +1,12 @@
 <script setup >
 
+defineProps(['value'])
+
 </script>
 
 <template>
     <div class="column">
-        <p class="culumn__input"></p>
+        <p class="column__input">{{ value }}</p>
     </div>
 </template>
 
@@ -12,10 +14,16 @@
 
     .column {
         background-color: gold;
-        width: 2rem;
-        height: 2rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 5rem;
+        height: 5rem;
 
         .column__input {
+            font-size: 2rem;
         }   
     }
 
