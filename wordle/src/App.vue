@@ -1,10 +1,52 @@
 <script setup>
 import TheHeader from './components/TheHeader.vue'
+import Column from './components/Column.vue'
+import Row from './components/Row.vue'
 </script>
 
 <template>
   <TheHeader></TheHeader>
+
+  <Row>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+  </Row>
   
+  <Row>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+  </Row>
+  
+  <Row>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+  </Row>
+  
+  <Row>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+  </Row>
+  
+  <Row>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+    <Column value="X"></Column>
+  </Row>
+
   <main>
   </main>
 </template>
