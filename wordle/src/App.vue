@@ -2,53 +2,57 @@
 import TheHeader from './components/TheHeader.vue'
 import Column from './components/Column.vue'
 import Row from './components/Row.vue'
+import Keyboard from './components/Keyboard.vue'
 </script>
 
 <template>
   <TheHeader></TheHeader>
 
-  <Row>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-  </Row>
-  
-  <Row>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-  </Row>
-  
-  <Row>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-  </Row>
-  
-  <Row>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-  </Row>
-  
-  <Row>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-    <Column value="X"></Column>
-  </Row>
+  <main class="main">
+      
+    <Row>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+    </Row>
+    
+    <Row>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+    </Row>
+    
+    <Row>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+    </Row>
+    
+    <Row>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+    </Row>
+    
+    <Row>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+      <Column value="X"></Column>
+    </Row>
 
-  <main>
-  </main>
+    <Keyboard></Keyboard>
+
+</main>
 </template>
 
 <style lang="scss">
@@ -85,5 +89,15 @@ import Row from './components/Row.vue'
       list-style-type: none;
       margin: 0;
       padding: 0; 
+  }
+
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2rem;
   }
 </style>
