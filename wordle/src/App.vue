@@ -1,8 +1,37 @@
 <script setup>
+import { ref } from 'vue'
+
 import TheHeader from './components/TheHeader.vue'
 import Column from './components/Column.vue'
 import Row from './components/Row.vue'
 import Keyboard from './components/Keyboard.vue'
+
+//GLOBALS ================================================================================
+const maxColumnNum = ref(5)
+const maxRowNum = ref(5)
+const rowIndex = ref(0)
+const columnIndex = ref(0)
+const currentRow = ref([])
+//EVENTS ================================================================================
+document.addEventListener('keyup', (e) => {
+  
+  const val = e.key.toUpperCase()
+  if(val === "ENTER") {
+    //TODO: check the row and react based on the state of the game
+    alert('ENTER')
+  }
+  else if(val === "BACKSPACE") {
+    columnIndex.value--
+    currentRow.value[columnIndex.value] = ''
+  }
+  else if(columnIndex.value === maxColumnNum.value) { return }
+  else if(val.length === 1 && (/[A-Z]/).test(val)) {
+    currentRow.value[columnIndex.value] = val
+    columnIndex.value++
+  }
+})
+
+
 </script>
 
 <template>
@@ -11,11 +40,11 @@ import Keyboard from './components/Keyboard.vue'
   <main class="main">
       
     <Row>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
+      <Column :value="currentRow[0]"></Column>
+      <Column :value="currentRow[1]"></Column>
+      <Column :value="currentRow[2]"></Column>
+      <Column :value="currentRow[3]"></Column>
+      <Column :value="currentRow[4]"></Column>
     </Row>
     
     <Row>
