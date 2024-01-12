@@ -6,6 +6,40 @@ import Column from './components/Column.vue'
 import Row from './components/Row.vue'
 import Keyboard from './components/Keyboard.vue'
 
+
+//WORDS:
+const words = [
+    "Latch", "Braid", "Snack", "Amber", "Swirl",
+    "Plumb", "Crisp", "Gears", "Blend", "Quirk",
+    "Frost", "Crown", "Pilot", "Roast", "Trail",
+    "Flame", "Charm", "Shade", "Quest", "Zebra",
+    "Fable", "Globe", "Crane", "Lunar", "Swift",
+    "Lemon", "Vivid", "Oasis", "Bench", "Dance",
+    "Cloud", "Rider", "Knots", "Feast", "Pouch",
+    "Grace", "Crush", "Sweep", "Joust", "Gleam",
+    "Chill", "Blitz", "Lunar", "Civic", "Spark",
+    "Fable", "Cameo", "Blend", "Prism", "Twist",
+    "Wings", "Brave", "Brisk", "Jewel", "Pulse",
+    "Ample", "Heart", "Mirth", "Diver", "Flint",
+    "Coral", "Funky", "Glide", "Jumbo", "Merry",
+    "Peach", "Forge", "Wedge", "Mirth", "Glint",
+    "Plush", "Quest", "Happy", "Wings", "Flare",
+    "Whale", "Lunar", "Oasis", "Globe", "Cloud",
+    "Frost", "Woven", "Chill", "Storm", "Daisy",
+    "Crown", "Blaze", "Vivid", "Brave", "Bloss",
+    "Frost", "Lunar", "Dream", "Mirth", "Bloom",
+    "Tiger", "Spark", "Twist", "Shade", "Jewel",
+    "Charm", "Roast", "Flame", "Swift", "Bench",
+    "Grain", "Sword", "Plaid", "Spine", "Stove",
+    "Beard", "Crate", "Spoke", "Wrist", "Crack",
+    "Table", "Horse", "Flock", "Spare", "Knots",
+    "Plume", "Maple", "Chase", "Slate", "Drift",
+    "Chest", "Mouth", "Break", "Queen", "Fleet",
+    "Vocal", "Porch", "Blind", "Bloom", "Rider",
+    "Pulse", "Quiet", "Shirt", "Fresh", "Guide",
+    "Music", "Taste", "Click", "Field", "Wheel"
+  ]
+
 //GLOBALS ================================================================================
 const maxColumnNum = ref(5)
 const maxRowNum = ref(5)
@@ -22,6 +56,28 @@ for(let i = 0; i < maxColumnNum.value; i++) {
   isWrong.value[i] = false
   isNotRightPos.value[i] = false
 }
+
+//FUNCTIONS =============================================================================
+
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive).
+ * The value is no lower than min (or the next integer greater than min
+ * if min isn't an integer) and no greater than max (or the next integer
+ * lower than max if max isn't an integer).
+ * Using Math.round() will give you a non-uniform distribution!
+ */
+ function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function newGameInit() {
+  const newWorld = words[getRandomInt(0, words.length - 1)]
+  console.log(newWorld)
+}
+
+newGameInit()
 //EVENTS ================================================================================
 document.addEventListener('keyup', (e) => {
   
