@@ -47,6 +47,9 @@ const rowIndex = ref(0)
 const columnIndex = ref(0)
 const currentRow = ref([])
 
+var currentWord = []
+var currentRowValues = []
+
 //NOTE: these are for now just for testing and the structure of this code will change
 const isCorrect = ref([])
 const isWrong = ref([])
@@ -73,8 +76,13 @@ for(let i = 0; i < maxColumnNum.value; i++) {
 }
 
 function newGameInit() {
-  const newWorld = words[getRandomInt(0, words.length - 1)]
-  console.log(newWorld)
+  const newWord = words[getRandomInt(0, words.length - 1)].toUpperCase()
+  const newWordArr = [...newWord]
+
+  for(let i = 0; i < 5; i++) {
+    currentWord[i] = newWordArr[i]
+  }
+  console.log(currentWord)
 }
 
 newGameInit()
@@ -85,9 +93,21 @@ document.addEventListener('keyup', (e) => {
   if(val === "ENTER") {
     //TODO: check the row and react based on the state of the game
     if(columnIndex.value === maxColumnNum.value) {
-      isCorrect.value[0] = true
-      isNotRightPos.value[1] = true
-      isWrong.value[2] = true
+      let columsState = [0, 0, 0, 0, 0]
+      for(let i = 0; i < 5; i++) {
+        if(currentWord.includes(currentRowValues[i])) { columsState[i] = 1}
+        if(currentRowValues[i] === currentWord[i]) { columsState[i] = 2}
+        
+        if(columsState[i] === 0) {  
+          isWrong.value[i] = true
+        }
+        else if(columsState[i] === 1) {
+          isNotRightPos.value[i] = true
+        }
+        else if(columsState[i] === 2) {
+          isCorrect.value[i] = true
+        }
+      }
     }
     else {
     }
@@ -99,6 +119,7 @@ document.addEventListener('keyup', (e) => {
   else if(columnIndex.value === maxColumnNum.value) { return }
   else if(val.length === 1 && (/[A-Z]/).test(val)) {
     currentRow.value[columnIndex.value] = val
+    currentRowValues[columnIndex.value] = val
     columnIndex.value++
   }
 })
