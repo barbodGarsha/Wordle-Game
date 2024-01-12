@@ -11,7 +11,6 @@ const props = defineProps({
 const classModifier = ref('')
 
 watch(() => [props.isCorrect, props.isNotRightPos, props.isWrong], ([isCorrect, isNotRightPos, isWrong]) => {
-    console.log(isCorrect, isNotRightPos)
     if(isCorrect) {
         classModifier.value = 'column--correct'
     }
