@@ -94,6 +94,11 @@ document.addEventListener('keyup', (e) => {
     //TODO: check the row and react based on the state of the game
     if(columnIndex.value === maxColumnNum.value) {
       let columsState = [0, 0, 0, 0, 0]
+
+      isCorrect.value = []
+      isWrong.value = []
+      isNotRightPos.value = []
+      
       for(let i = 0; i < 5; i++) {
         if(currentWord.includes(currentRowValues[i])) { columsState[i] = 1}
         if(currentRowValues[i] === currentWord[i]) { columsState[i] = 2}
