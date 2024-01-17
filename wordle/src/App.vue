@@ -53,20 +53,12 @@ var currentWord = []
 const isCorrect = ref([])
 const isWrong = ref([])
 const isNotRightPos = ref([])
-for(let i = 0; i < maxRowNum.value; i++) {
-  rowValues.value[i] = []
+rowValues.value = createTwoDemArr(maxRowNum.value, maxColumnNum, '')
 
-  isCorrect.value[i] = []
-  isWrong.value[i] = []
-  isNotRightPos.value[i] = []
-  for(let j = 0; j < maxColumnNum.value; j++) {
-    rowValues.value[i][j] = ''
+isCorrect.value = createTwoDemArr(maxRowNum.value, maxColumnNum, false)
+isWrong.value = createTwoDemArr(maxRowNum.value, maxColumnNum, false)
+isNotRightPos.value = createTwoDemArr(maxRowNum.value, maxColumnNum, false)
 
-    isCorrect.value[i][j] = false
-    isWrong.value[i][j] = false
-    isNotRightPos.value[i][j] = false
-  }
-}
 
 //FUNCTIONS =============================================================================
 
@@ -77,10 +69,21 @@ for(let i = 0; i < maxRowNum.value; i++) {
  * lower than max if max isn't an integer).
  * Using Math.round() will give you a non-uniform distribution!
  */
- function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createTwoDemArr(rowNum, ColumnNum, initValue) {
+  let arr = []
+  for(let i = 0; i < rowNum; i++) {
+    arr[i] = []
+    for(let j = 0; j < ColumnNum; j++) {
+      arr[i][j] = initValue
+    } 
+  }
+  return arr
 }
 
 function newGameInit() {
@@ -103,20 +106,8 @@ document.addEventListener('keyup', (e) => {
     if(columnIndex.value === maxColumnNum.value) {
       let columsState = []
      
-      for(let i = 0; i < maxRowNum.value; i++) {
-        columsState[i] = []          
-
-        isCorrect.value[i] = []
-        isWrong.value[i] = []
-        isNotRightPos.value[i] = []
-        for(let j = 0; j < maxColumnNum.value; j++) {
-
-          columsState[i][j] = 0
-          isCorrect.value[i] = []
-          isWrong.value[i] = []
-          isNotRightPos.value[i] = []
-        }
-      }
+      columsState = createTwoDemArr(maxRowNum.value, maxColumnNum, 0)
+      
       for(let i = 0; i < 5; i++) {
         
         if(currentWord.includes(rowValues.value[rowIndex.value][i])) { columsState[rowIndex.value][i] = 1}
