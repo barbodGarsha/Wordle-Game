@@ -45,19 +45,27 @@ const maxColumnNum = ref(5)
 const maxRowNum = ref(5)
 const rowIndex = ref(0)
 const columnIndex = ref(0)
-const currentRow = ref([])
+const rowValues = ref([])
 
 var currentWord = []
-var currentRowValues = []
 
 //NOTE: these are for now just for testing and the structure of this code will change
 const isCorrect = ref([])
 const isWrong = ref([])
 const isNotRightPos = ref([])
-for(let i = 0; i < maxColumnNum.value; i++) {
-  isCorrect.value[i] = false
-  isWrong.value[i] = false
-  isNotRightPos.value[i] = false
+for(let i = 0; i < maxRowNum.value; i++) {
+  rowValues.value[i] = []
+
+  isCorrect.value[i] = []
+  isWrong.value[i] = []
+  isNotRightPos.value[i] = []
+  for(let j = 0; j < maxColumnNum.value; j++) {
+    rowValues.value[i][j] = ''
+
+    isCorrect.value[i][j] = false
+    isWrong.value[i][j] = false
+    isNotRightPos.value[i][j] = false
+  }
 }
 
 //FUNCTIONS =============================================================================
@@ -93,38 +101,50 @@ document.addEventListener('keyup', (e) => {
   if(val === "ENTER") {
     //TODO: check the row and react based on the state of the game
     if(columnIndex.value === maxColumnNum.value) {
-      let columsState = [0, 0, 0, 0, 0]
+      let columsState = []
+     
+      for(let i = 0; i < maxRowNum.value; i++) {
+        columsState[i] = []          
 
-      isCorrect.value = []
-      isWrong.value = []
-      isNotRightPos.value = []
-      
-      for(let i = 0; i < 5; i++) {
-        if(currentWord.includes(currentRowValues[i])) { columsState[i] = 1}
-        if(currentRowValues[i] === currentWord[i]) { columsState[i] = 2}
-        
-        if(columsState[i] === 0) {  
-          isWrong.value[i] = true
-        }
-        else if(columsState[i] === 1) {
-          isNotRightPos.value[i] = true
-        }
-        else if(columsState[i] === 2) {
-          isCorrect.value[i] = true
+        isCorrect.value[i] = []
+        isWrong.value[i] = []
+        isNotRightPos.value[i] = []
+        for(let j = 0; j < maxColumnNum.value; j++) {
+
+          columsState[i][j] = 0
+          isCorrect.value[i] = []
+          isWrong.value[i] = []
+          isNotRightPos.value[i] = []
         }
       }
+      for(let i = 0; i < 5; i++) {
+        
+        if(currentWord.includes(rowValues.value[rowIndex.value][i])) { columsState[rowIndex.value][i] = 1}
+        if(rowValues.value[rowIndex.value][i] === currentWord[i]) { columsState[rowIndex.value][i] = 2}
+        
+        if(columsState[rowIndex.value][i] === 0) {  
+          isWrong.value[rowIndex.value][i] = true
+        }
+        else if(columsState[rowIndex.value][i] === 1) {
+          isNotRightPos.value[rowIndex.value][i] = true
+        }
+        else if(columsState[rowIndex.value][i] === 2) {
+          isCorrect.value[rowIndex.value][i] = true
+        }
+      }
+      rowIndex.value++
+      columnIndex.value = 0
     }
     else {
     }
   }
   else if(val === "BACKSPACE") {
     columnIndex.value--
-    currentRow.value[columnIndex.value] = ''
+    rowValues.value[rowIndex.value][columnIndex.value] = ''
   }
   else if(columnIndex.value === maxColumnNum.value) { return }
   else if(val.length === 1 && (/[A-Z]/).test(val)) {
-    currentRow.value[columnIndex.value] = val
-    currentRowValues[columnIndex.value] = val
+    rowValues.value[rowIndex.value][columnIndex.value] = val
     columnIndex.value++
   }
 })
@@ -136,47 +156,11 @@ document.addEventListener('keyup', (e) => {
   <TheHeader></TheHeader>
 
   <main class="main">
-      
-    <Row>
-      <Column :value="currentRow[0]" :isCorrect="isCorrect[0]" :isNotRightPos="isNotRightPos[0]" :isWrong="isWrong[0]"></Column>
-      <Column :value="currentRow[1]" :isCorrect="isCorrect[1]" :isNotRightPos="isNotRightPos[1]" :isWrong="isWrong[1]"></Column>
-      <Column :value="currentRow[2]" :isCorrect="isCorrect[2]" :isNotRightPos="isNotRightPos[2]" :isWrong="isWrong[2]"></Column>
-      <Column :value="currentRow[3]" :isCorrect="isCorrect[3]" :isNotRightPos="isNotRightPos[3]" :isWrong="isWrong[3]"></Column>
-      <Column :value="currentRow[4]" :isCorrect="isCorrect[4]" :isNotRightPos="isNotRightPos[4]" :isWrong="isWrong[4]"></Column>
+     
+    <Row v-for="i in maxRowNum">
+      <Column v-for="j in maxColumnNum" :value="rowValues[i - 1][j - 1]" :isCorrect="isCorrect[i - 1][j - 1]" :isNotRightPos="isNotRightPos[i - 1][j - 1]" :isWrong="isWrong[i - 1][j - 1]"></Column>
     </Row>
     
-    <Row>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-    </Row>
-    
-    <Row>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-    </Row>
-    
-    <Row>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-    </Row>
-    
-    <Row>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-      <Column value="X"></Column>
-    </Row>
-
     <Keyboard></Keyboard>
 
 </main>
