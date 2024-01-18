@@ -104,22 +104,20 @@ document.addEventListener('keydown', (e) => {
   if(val === "ENTER") {
     //TODO: check the row and react based on the state of the game
     if(columnIndex.value === maxColumnNum.value) {
-      let columsState = []
+      let columsState = [0, 0, 0, 0, 0]
      
-      columsState = createTwoDemArr(maxRowNum.value, maxColumnNum, 0)
-      
       for(let i = 0; i < 5; i++) {
         
-        if(currentWord.includes(rowValues.value[rowIndex.value][i])) { columsState[rowIndex.value][i] = 1}
-        if(rowValues.value[rowIndex.value][i] === currentWord[i]) { columsState[rowIndex.value][i] = 2}
+        if(currentWord.includes(rowValues.value[rowIndex.value][i])) { columsState[i] = 1}
+        if(rowValues.value[rowIndex.value][i] === currentWord[i]) { columsState[i] = 2}
         
-        if(columsState[rowIndex.value][i] === 0) {  
+        if(columsState[i] === 0) {  
           isWrong.value[rowIndex.value][i] = true
         }
-        else if(columsState[rowIndex.value][i] === 1) {
+        else if(columsState[i] === 1) {
           isNotRightPos.value[rowIndex.value][i] = true
         }
-        else if(columsState[rowIndex.value][i] === 2) {
+        else if(columsState[i] === 2) {
           isCorrect.value[rowIndex.value][i] = true
         }
       }
