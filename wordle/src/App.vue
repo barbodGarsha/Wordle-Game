@@ -53,11 +53,11 @@ var currentWord = []
 const isCorrect = ref([])
 const isWrong = ref([])
 const isNotRightPos = ref([])
-rowValues.value = createTwoDemArr(maxRowNum.value, maxColumnNum, '')
+rowValues.value = createTwoDimArr(maxRowNum.value, maxColumnNum, '')
 
-isCorrect.value = createTwoDemArr(maxRowNum.value, maxColumnNum, false)
-isWrong.value = createTwoDemArr(maxRowNum.value, maxColumnNum, false)
-isNotRightPos.value = createTwoDemArr(maxRowNum.value, maxColumnNum, false)
+isCorrect.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
+isWrong.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
+isNotRightPos.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
 
 
 //FUNCTIONS =============================================================================
@@ -75,7 +75,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function createTwoDemArr(rowNum, ColumnNum, initValue) {
+function createTwoDimArr(rowNum, ColumnNum, initValue) {
   let arr = []
   for(let i = 0; i < rowNum; i++) {
     arr[i] = []
