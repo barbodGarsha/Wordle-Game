@@ -98,7 +98,7 @@ function newGameInit() {
 
 newGameInit()
 //EVENTS ================================================================================
-document.addEventListener('keyup', (e) => {
+document.addEventListener('keydown', (e) => {
   
   const val = e.key.toUpperCase()
   if(val === "ENTER") {
