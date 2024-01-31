@@ -105,7 +105,8 @@ document.addEventListener('keydown', (e) => {
     //TODO: check the row and react based on the state of the game
     if(columnIndex.value === maxColumnNum.value) {
       let columsState = [0, 0, 0, 0, 0]
-     
+      let rightAnswers = 0
+
       for(let i = 0; i < 5; i++) {
         
         if(currentWord.includes(rowValues.value[rowIndex.value][i])) { columsState[i] = 1}
@@ -119,10 +120,17 @@ document.addEventListener('keydown', (e) => {
         }
         else if(columsState[i] === 2) {
           isCorrect.value[rowIndex.value][i] = true
+          rightAnswers++
         }
       }
       rowIndex.value++
       columnIndex.value = 0
+      if(rightAnswers === 5) {
+        alert("WON")
+      }
+      else if(rowIndex.value === maxRowNum.value) {
+        alert("LOST")
+      }
     }
     else {
     }
@@ -150,7 +158,6 @@ document.addEventListener('keydown', (e) => {
       <Column v-for="j in maxColumnNum" :value="rowValues[i - 1][j - 1]" :isCorrect="isCorrect[i - 1][j - 1]" :isNotRightPos="isNotRightPos[i - 1][j - 1]" :isWrong="isWrong[i - 1][j - 1]"></Column>
     </Row>
     
-    <Keyboard></Keyboard>
 
 </main>
 </template>
@@ -162,6 +169,8 @@ document.addEventListener('keydown', (e) => {
   //RESETS
   html {
       box-sizing: border-box;
+      
+      font-family: 'Poppins', sans-serif;
   }
     
   *, *:before, *:after {
