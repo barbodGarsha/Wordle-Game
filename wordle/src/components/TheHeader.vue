@@ -17,7 +17,7 @@ const header__titleClassList = ref("header__title")
 <style lang="scss">
 
 .header {
-    background-color: beige;
+    background-color: #FFF9EC;
     
     display: flex;
     justify-content: center;
@@ -28,7 +28,13 @@ const header__titleClassList = ref("header__title")
     padding: 2rem;
 
     .header__title {
+        color: #1E4652;
+ 
+        text-transform: uppercase;
+ 
         font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1rem;
     }
 }
 

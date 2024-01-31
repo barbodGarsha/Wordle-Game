@@ -33,27 +33,29 @@ watch(() => [props.isCorrect, props.isNotRightPos, props.isWrong], ([isCorrect, 
 <style lang="scss">
 
     .column {
-        background-color: beige;
+        background-color: #FFF9EC;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
+        border: solid 2px white;
         width: 5rem;
         height: 5rem;
 
         .column__input {
+            color: #1E4652;
             font-size: 2rem;
         }   
     }
     .column--correct {
-        background-color: green;
+        background-color: #759F4C;
     }
     .column--not-right-position {
-        background-color: yellow;
+        background-color: #F8D987;
     }
     .column--wrong {
-        background-color: gray;
+        background-color: #C6C1B4;
     }
 
 </style>
