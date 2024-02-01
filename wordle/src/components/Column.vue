@@ -20,6 +20,9 @@ watch(() => [props.isCorrect, props.isNotRightPos, props.isWrong], ([isCorrect, 
     else if(isWrong) {
         classModifier.value = 'column--wrong'
     }
+    else {
+        classModifier.value = ''
+    }
 })
 
 </script>

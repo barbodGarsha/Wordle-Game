@@ -93,6 +93,16 @@ function newGameInit() {
   for(let i = 0; i < 5; i++) {
     currentWord[i] = newWordArr[i]
   }
+  
+  rowValues.value = createTwoDimArr(maxRowNum.value, maxColumnNum, '')
+
+  isCorrect.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
+  isWrong.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
+  isNotRightPos.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
+  
+  columnIndex.value = 0
+  rowIndex.value = 0
+  
   console.log(currentWord)
 }
 
@@ -138,6 +148,9 @@ document.addEventListener('keydown', (e) => {
   else if(val === "BACKSPACE") {
     columnIndex.value--
     rowValues.value[rowIndex.value][columnIndex.value] = ''
+  }
+  else if(val === "ESCAPE") {
+    newGameInit()
   }
   else if(columnIndex.value === maxColumnNum.value) { return }
   else if(val.length === 1 && (/[A-Z]/).test(val)) {
