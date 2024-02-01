@@ -19,7 +19,7 @@ import Key from './Key.vue'
             <Key>O</Key>
             <Key>P</Key>
         </div>
-        <div class="keyboard__row">
+        <div class="keyboard__row keyboard__row--second">
             <Key>A</Key>
             <Key>S</Key>
             <Key>D</Key>
@@ -30,7 +30,7 @@ import Key from './Key.vue'
             <Key>K</Key>
             <Key>L</Key>
         </div>
-        <div class="keyboard__row">
+        <div class="keyboard__row keyboard__row--third">
             <Key>Z</Key>
             <Key>X</Key>
             <Key>C</Key>
@@ -48,6 +48,12 @@ import Key from './Key.vue'
         .keyboard__row {
             display: flex;
         }   
+        .keyboard__row--second {
+            margin-left: 2.5rem;
+        }
+        .keyboard__row--third {
+            margin-left: 5rem;
+        }
     }
 
 </style>
