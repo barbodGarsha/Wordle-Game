@@ -1,11 +1,29 @@
 <script setup>
 
+import { ref } from 'vue'
+
+const props = defineProps ({
+    value: String,
+    isLong: {
+        default: false,
+        type: Boolean
+    }
+})
+
+function onClick(e) {
+    if(props.value === "Del") {
+        document.dispatchEvent(new KeyboardEvent('keydown',{'key': 'Backspace'}))
+    }
+    else [    
+        document.dispatchEvent(new KeyboardEvent('keydown',{'key':props.value}))
+    ]
+}
 </script>
 
 <template>
-<div class="key">
+<div :class="['key', {'key--long' : props.isLong} ]" @click="onClick">
     <p class="key__p">
-        <slot></slot>
+        {{ props.value }}
     </p>
 </div>
 </template>
@@ -28,6 +46,9 @@
     .key__p {
         font-size: 2rem;
     }   
+}
+.key--long {
+    width: 10rem;
 }
 .key:hover {
     background-color: #ffe7b3;
