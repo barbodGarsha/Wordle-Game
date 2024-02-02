@@ -242,11 +242,11 @@ document.addEventListener('keydown', (e) => {
 
     .main__nav {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
 
+      width: 15rem;
       padding: 1rem;
-      width: 100%;
     }
   }
 </style>
