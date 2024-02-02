@@ -18,7 +18,7 @@ import Key from './Key.vue'
             <Key value="I"></Key>
             <Key value="O"></Key>
             <Key value="P"></Key>
-            <Key value="Del" is-long="true"></Key>
+            <Key value="Del" :is-long="true"></Key>
         </div>
         <div class="keyboard__row keyboard__row--second">
             <Key value="A"></Key>
@@ -30,7 +30,7 @@ import Key from './Key.vue'
             <Key value="J"></Key>
             <Key value="K"></Key>
             <Key value="L"></Key>
-            <Key value="Enter" is-long="true"></Key>
+            <Key value="Enter" :is-long="true"></Key>
         </div>
         <div class="keyboard__row keyboard__row--third">
             <Key value="Z"></Key>
