@@ -14,6 +14,10 @@ const props = defineProps ({
     hasRotaionAnimation: {
         default: false,
         type: Boolean
+    },
+    hasMirrorAnimation: {
+        default: false,
+        type: Boolean
     }
 })
 
@@ -24,7 +28,7 @@ function getImageUrl() {
 </script>
 
 <template>
-    <div :class="['btn', {'btn--has-rotation-animation' : props.hasRotaionAnimation}]">
+    <div :class="['btn', {'btn--has-rotation-animation' : props.hasRotaionAnimation}, {'btn--has-mirror-animation' : props.hasMirrorAnimation}]">
         <img v-if="props.isIconOnly" :src="getImageUrl()" alt="icon" class="btn__icon">
     </div>
 </template>
@@ -40,13 +44,18 @@ function getImageUrl() {
         background-color: #FFF9EC;
         
         border-radius: 15px;
-        width: 5rem;
+        width: 4rem;
         .btn__icon {
             width: 100%;
 
-            padding: 1rem;
+            padding: .75rem;
 
             transition-duration: 500ms;
+        }
+    }
+    .btn--has-mirror-animation {
+        .btn__icon {
+            transition-duration: 1s;
         }
     }
     .btn--has-rotation-animation:hover {
@@ -54,4 +63,10 @@ function getImageUrl() {
             transform: rotate(180deg);
         }
     }
+    .btn--has-mirror-animation:hover {
+        .btn__icon {
+            transform: rotateY(360deg);
+        }
+    }
+    
 </style>
