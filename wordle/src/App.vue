@@ -5,6 +5,7 @@ import TheHeader from './components/TheHeader.vue'
 import Column from './components/Column.vue'
 import Row from './components/Row.vue'
 import Keyboard from './components/Keyboard.vue'
+import Button from './components/Button.vue'
 
 
 //WORDS:
@@ -167,6 +168,10 @@ document.addEventListener('keydown', (e) => {
 
   <main class="main">
      
+    <div class="main__nav">
+      <Button :isIconOnly="true" iconName="setting.png" :hasRotaionAnimation="true"></Button>
+    </div>
+
     <div class="main__section">
       <Row v-for="i in maxRowNum">
         <Column v-for="j in maxColumnNum" :value="rowValues[i - 1][j - 1]" :isCorrect="isCorrect[i - 1][j - 1]" :isNotRightPos="isNotRightPos[i - 1][j - 1]" :isWrong="isWrong[i - 1][j - 1]"></Column>
