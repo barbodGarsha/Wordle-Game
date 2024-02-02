@@ -170,6 +170,8 @@ document.addEventListener('keydown', (e) => {
      
     <div class="main__nav">
       <Button :isIconOnly="true" iconName="setting.png" :hasRotaionAnimation="true"></Button>
+      <Button :isIconOnly="true" iconName="stats.png" :has-mirror-animation="true"></Button>
+      <Button :isIconOnly="true" iconName="help.png" :has-mirror-animation="true"></Button>
     </div>
 
     <div class="main__section">
@@ -236,6 +238,15 @@ document.addEventListener('keydown', (e) => {
 
     .main__section {
       margin: 1rem 0;
+    }
+
+    .main__nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 1rem;
+      width: 100%;
     }
   }
 </style>
