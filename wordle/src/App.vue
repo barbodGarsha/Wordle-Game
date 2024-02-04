@@ -146,6 +146,7 @@ document.addEventListener('keydown', (e) => {
     if(hardModeEnabled.value) {
       if(!foundLetters.value.every(i => rowValues.value[rowIndex.value].includes(i))) {
         alert('HARD MODE')
+        //TODO: clear the row maybe?
         return
       }
     } 
