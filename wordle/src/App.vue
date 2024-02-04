@@ -6,7 +6,8 @@ import Column from './components/Column.vue'
 import Row from './components/Row.vue'
 import Keyboard from './components/Keyboard.vue'
 import Button from './components/Button.vue'
-
+import Overlay from './components/Overlay.vue'
+import ToggleButton from './components/ToggleButton.vue'
 
 //WORDS:
 const words = [
@@ -160,7 +161,9 @@ document.addEventListener('keydown', (e) => {
   }
 })
 
+function test(e) {
 
+}
 </script>
 
 <template>
@@ -168,6 +171,15 @@ document.addEventListener('keydown', (e) => {
 
   <main class="main">
      
+    <Overlay>
+      <div class="settings">
+        <div class="settings__section">
+          <p class="settings__section__p">Dark Mode</p>  
+          <ToggleButton @toggled="test"></ToggleButton>
+        </div>
+      </div>
+    </Overlay>
+
     <div class="main__nav">
       <Button :isIconOnly="true" iconName="setting.png" :hasRotaionAnimation="true"></Button>
       <Button :isIconOnly="true" iconName="stats.png" :has-mirror-animation="true"></Button>
@@ -203,6 +215,7 @@ document.addEventListener('keydown', (e) => {
   }
 
   body {
+      overflow: hidden;
       background-color: white;
       margin: 0;
       padding: 0;
@@ -227,6 +240,27 @@ document.addEventListener('keydown', (e) => {
       padding: 0; 
   }
 
+
+  .settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    .settings__section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 2rem;
+      border-radius: 15px;
+      border: solid 1px #1E4652;
+      width: 90%;
+      .settings__section__p {
+        font-size: 1.2rem;
+      }
+    }
+  }
 
   .main {
     display: flex;
