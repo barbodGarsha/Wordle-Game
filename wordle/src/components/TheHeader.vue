@@ -3,14 +3,18 @@
 import { ref } from 'vue'
 
 //TODO: the const classes like the ones below should be hard coded into the template but the modifiers better be using refs instead
-const headerClassList = ref("header")
-const header__titleClassList = ref("header__title")
 
+const props = defineProps ({
+    darkMode: {
+        default: false,
+        type: Boolean
+    }
+})
 </script>
 
 <template>
-    <header :class="headerClassList">
-        <p :class="header__titleClassList">Wordle</p>
+    <header :class="['header', {'header--darkmode' : props.darkMode}]">
+        <p class="header__title">Wordle</p>
     </header>
 </template>
 
@@ -35,6 +39,12 @@ const header__titleClassList = ref("header__title")
         font-size: 2rem;
         font-weight: 700;
         letter-spacing: 1rem;
+    }
+}
+.header--darkmode {
+    background-color: #1E4652;
+    .header__title {
+        color: #FFF9EC;
     }
 }
 

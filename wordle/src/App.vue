@@ -43,6 +43,8 @@ const words = [
   ]
 
 //GLOBALS ================================================================================
+const darkModeEnabled = ref(false)
+
 const maxColumnNum = ref(5)
 const maxRowNum = ref(5)
 const rowIndex = ref(0)
@@ -88,6 +90,10 @@ function createTwoDimArr(rowNum, ColumnNum, initValue) {
     } 
   }
   return arr
+}
+
+function darkModeChange(state) {
+  darkModeEnabled.value = state
 }
 
 function newGameInit() {
@@ -173,15 +179,15 @@ function closeSettings() {
 </script>
 
 <template>
-  <TheHeader></TheHeader>
+  <TheHeader :dark-mode="darkModeEnabled"></TheHeader>
 
-  <main class="main">
+  <main :class="['main', { 'main--darkmode' : darkModeEnabled }]">
      
     <Overlay @background-clicked="closeSettings" :hidden="settingsHidden">
       <div class="settings">
         <div class="settings__section">
           <p class="settings__section__p">Dark Mode</p>  
-          <ToggleButton @toggled=""></ToggleButton>
+          <ToggleButton @toggled="darkModeChange"></ToggleButton>
         </div>
       </div>
     </Overlay>
@@ -288,5 +294,8 @@ function closeSettings() {
       width: 15rem;
       padding: 1rem;
     }
+  }
+  .main--darkmode {
+    background-color: #4A6A74;
   }
 </style>
