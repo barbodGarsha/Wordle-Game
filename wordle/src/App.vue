@@ -43,22 +43,14 @@ const words = [
   ]
 
 //GLOBALS ================================================================================
-const darkModeEnabled = ref(false)
 
+// ---- BOARD ----
 const maxColumnNum = ref(5)
 const maxRowNum = ref(5)
 const rowIndex = ref(0)
 const columnIndex = ref(0)
 const rowValues = ref([])
 
-const settingsHidden = ref(true)
-
-const gameWon = ref(false)
-const gameLost = ref(false)
-
-var currentWord = []
-
-//NOTE: these are for now just for testing and the structure of this code will change
 const isCorrect = ref([])
 const isWrong = ref([])
 const isNotRightPos = ref([])
@@ -69,15 +61,19 @@ isWrong.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
 isNotRightPos.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
 
 
+// ---- GENERAL ----
+const darkModeEnabled = ref(false)
+const settingsHidden = ref(true)
+
+// ---- GAME STATE ----
+const gameWon = ref(false)
+const gameLost = ref(false)
+
+var currentWord = []
+
 //FUNCTIONS =============================================================================
 
-/**
- * Returns a random integer between min (inclusive) and max (inclusive).
- * The value is no lower than min (or the next integer greater than min
- * if min isn't an integer) and no greater than max (or the next integer
- * lower than max if max isn't an integer).
- * Using Math.round() will give you a non-uniform distribution!
- */
+// ---- TOOLS ----
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -95,8 +91,17 @@ function createTwoDimArr(rowNum, ColumnNum, initValue) {
   return arr
 }
 
+// ---- ACTIONS ----
 function darkModeChange(state) {
   darkModeEnabled.value = state
+}
+
+function openSettings () {
+  settingsHidden.value = false
+}
+
+function closeSettings() {
+  settingsHidden.value = true
 }
 
 function newGameInit() {
@@ -122,7 +127,6 @@ function newGameInit() {
   console.log(currentWord)
 }
 
-newGameInit()
 //EVENTS ================================================================================
 document.addEventListener('keydown', (e) => {
   
@@ -175,13 +179,9 @@ document.addEventListener('keydown', (e) => {
   }
 })
 
-function openSettings () {
-  settingsHidden.value = false
-}
+// MAIN =================================================================================
+newGameInit()
 
-function closeSettings() {
-  settingsHidden.value = true
-}
 </script>
 
 <template>
@@ -319,6 +319,7 @@ function closeSettings() {
       font-weight: bold;
     }
   }
+  
   .main {
     display: flex;
     flex-direction: column;
