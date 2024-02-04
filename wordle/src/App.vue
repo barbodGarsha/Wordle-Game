@@ -50,19 +50,21 @@ const maxRowNum = ref(5)
 const rowIndex = ref(0)
 const columnIndex = ref(0)
 const rowValues = ref([])
+const foundLetters = ref([])
 
 const isCorrect = ref([])
 const isWrong = ref([])
 const isNotRightPos = ref([])
-rowValues.value = createTwoDimArr(maxRowNum.value, maxColumnNum, '')
 
+rowValues.value = createTwoDimArr(maxRowNum.value, maxColumnNum, '')
 isCorrect.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
 isWrong.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
 isNotRightPos.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
 
 
-// ---- GENERAL ----
+// ---- SETTINGS ----
 const darkModeEnabled = ref(false)
+const hardModeEnabled = ref(false)
 const settingsHidden = ref(true)
 
 // ---- GAME STATE ----
@@ -92,8 +94,12 @@ function createTwoDimArr(rowNum, ColumnNum, initValue) {
 }
 
 // ---- ACTIONS ----
-function darkModeChange(state) {
+function darkModeChanged(state) {
   darkModeEnabled.value = state
+}
+
+function hardModeChanged(state) {
+  hardModeEnabled.value = state
 }
 
 function openSettings () {
@@ -124,7 +130,11 @@ function newGameInit() {
   gameLost.value = false
   gameWon.value = false
 
+  // UNFINISHED
   console.log(currentWord)
+  //const usedWords = getCookie(COOKIE_USEDWORDS)
+  //setCookie(COOKIE_USEDWORDS, usedWords + ", " + newWord, 1)
+  //console.log(getCookie(COOKIE_USEDWORDS))
 }
 
 //EVENTS ================================================================================
@@ -132,14 +142,25 @@ document.addEventListener('keydown', (e) => {
   
   const val = e.key.toUpperCase()
   if(val === "ENTER") {
-    //TODO: check the row and react based on the state of the game
+    
+    if(hardModeEnabled.value) {
+      if(!foundLetters.value.every(i => rowValues.value[rowIndex.value].includes(i))) {
+        alert('HARD MODE')
+        return
+      }
+    } 
     if(columnIndex.value === maxColumnNum.value) {
       let columsState = [0, 0, 0, 0, 0]
       let rightAnswers = 0
 
       for(let i = 0; i < 5; i++) {
         
-        if(currentWord.includes(rowValues.value[rowIndex.value][i])) { columsState[i] = 1}
+        if(currentWord.includes(rowValues.value[rowIndex.value][i])) { 
+          columsState[i] = 1
+          if(!foundLetters.value.includes(rowValues.value[rowIndex.value][i])) {
+            foundLetters.value.push(rowValues.value[rowIndex.value][i])
+          }
+        }
         if(rowValues.value[rowIndex.value][i] === currentWord[i]) { columsState[i] = 2}
         
         if(columsState[i] === 0) {  
@@ -180,6 +201,8 @@ document.addEventListener('keydown', (e) => {
 })
 
 //COOKIES ===============================================================================
+const COOKIE_USEDWORDS = "usedWords"
+
 function setCookie(name, value, ex) {
   const date = new Date();
   date.setTime(date.getTime() + (ex*24*60*60*1000));
@@ -222,7 +245,12 @@ newGameInit()
       <div class="settings">
         <div class="settings__section">
           <p class="settings__section__p">Dark Mode</p>  
-          <ToggleButton @toggled="darkModeChange"></ToggleButton>
+          <ToggleButton @toggled="darkModeChanged"></ToggleButton>
+        </div>
+        
+        <div class="settings__section">
+          <p class="settings__section__p">Hard Mode</p>  
+          <ToggleButton @toggled="hardModeChanged"></ToggleButton>
         </div>
       </div>
     </Overlay>
@@ -302,6 +330,7 @@ newGameInit()
 
   .settings {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -311,7 +340,8 @@ newGameInit()
       justify-content: space-between;
       align-items: center;
 
-      padding: 2rem;
+      margin: 1rem 0;
+      padding: 1rem;
       border-radius: 15px;
       border: solid 1px #1E4652;
       width: 90%;
