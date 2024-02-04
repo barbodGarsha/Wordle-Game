@@ -49,6 +49,8 @@ const rowIndex = ref(0)
 const columnIndex = ref(0)
 const rowValues = ref([])
 
+const settingsHidden = ref(true)
+
 var currentWord = []
 
 //NOTE: these are for now just for testing and the structure of this code will change
@@ -161,8 +163,12 @@ document.addEventListener('keydown', (e) => {
   }
 })
 
-function test(e) {
+function openSettings () {
+  settingsHidden.value = false
+}
 
+function closeSettings() {
+  settingsHidden.value = true
 }
 </script>
 
@@ -171,17 +177,17 @@ function test(e) {
 
   <main class="main">
      
-    <Overlay>
+    <Overlay @background-clicked="closeSettings" :hidden="settingsHidden">
       <div class="settings">
         <div class="settings__section">
           <p class="settings__section__p">Dark Mode</p>  
-          <ToggleButton @toggled="test"></ToggleButton>
+          <ToggleButton @toggled=""></ToggleButton>
         </div>
       </div>
     </Overlay>
 
     <div class="main__nav">
-      <Button :isIconOnly="true" iconName="setting.png" :hasRotaionAnimation="true"></Button>
+      <Button @clicked="openSettings" :isIconOnly="true" iconName="setting.png" :hasRotaionAnimation="true"></Button>
       <Button :isIconOnly="true" iconName="stats.png" :has-mirror-animation="true"></Button>
       <Button :isIconOnly="true" iconName="help.png" :has-mirror-animation="true"></Button>
     </div>

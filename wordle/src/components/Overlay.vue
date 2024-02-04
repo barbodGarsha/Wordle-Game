@@ -1,9 +1,21 @@
 <script setup>
+import { watch, ref } from 'vue'
 
+const emit = defineEmits(['backgroundClicked'])
+const props = defineProps({
+    hidden: {
+        default: false,
+        type: Boolean
+    }
+})
+
+function backgroundClicked(e) {
+    if(e.target.classList.contains('overlay')) { emit('backgroundClicked') }
+}
 </script>
 
 <template>
-    <div class="overlay">
+    <div @click="backgroundClicked" :class="['overlay', {'overlay--hidden' : props.hidden}]">
         <div class="overlay__container">
             <slot>
 
@@ -29,6 +41,7 @@
         left: 0;
         z-index: 999999;
 
+        transition-duration: 200ms;
         .overlay__container{
             background-color: #FFF9EC;
             
@@ -43,6 +56,10 @@
             height: 45rem;
 
         }
+    }
+    .overlay--hidden {
+        pointer-events: none;
+        opacity: 0;
     }
 
 </style>
