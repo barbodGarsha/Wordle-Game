@@ -1,9 +1,5 @@
 <script setup>
 
-import { ref } from 'vue'
-
-//TODO: the const classes like the ones below should be hard coded into the template but the modifiers better be using refs instead
-
 const props = defineProps ({
     darkMode: {
         default: false,

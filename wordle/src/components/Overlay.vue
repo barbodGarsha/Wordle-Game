@@ -1,7 +1,7 @@
 <script setup>
-import { watch, ref } from 'vue'
 
 const emit = defineEmits(['backgroundClicked'])
+
 const props = defineProps({
     hidden: {
         default: false,

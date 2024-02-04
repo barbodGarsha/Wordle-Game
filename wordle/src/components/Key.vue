@@ -1,7 +1,5 @@
 <script setup>
 
-import { ref } from 'vue'
-
 const props = defineProps ({
     value: String,
     isLong: {
