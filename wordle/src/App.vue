@@ -53,6 +53,9 @@ const rowValues = ref([])
 
 const settingsHidden = ref(true)
 
+const gameWon = ref(false)
+const gameLost = ref(false)
+
 var currentWord = []
 
 //NOTE: these are for now just for testing and the structure of this code will change
@@ -113,6 +116,9 @@ function newGameInit() {
   columnIndex.value = 0
   rowIndex.value = 0
   
+  gameLost.value = false
+  gameWon.value = false
+
   console.log(currentWord)
 }
 
@@ -146,10 +152,10 @@ document.addEventListener('keydown', (e) => {
       rowIndex.value++
       columnIndex.value = 0
       if(rightAnswers === 5) {
-        alert("WON")
+        gameWon.value = true
       }
       else if(rowIndex.value === maxRowNum.value) {
-        alert("LOST")
+        gameLost.value = true
       }
     }
     else {
@@ -192,6 +198,18 @@ function closeSettings() {
       </div>
     </Overlay>
 
+    <Overlay :hidden="!gameWon">
+      <div class="you-won">
+        <p class="you-won__message">You Won</p>
+      </div>
+    </Overlay>
+
+    <Overlay :hidden="!gameLost">
+      <div class="you-lost">
+        <p class="you-lost__message">You Lost</p>
+      </div>
+    </Overlay>
+    
     <div class="main__nav">
       <Button @clicked="openSettings" :isIconOnly="true" iconName="setting.png" :hasRotaionAnimation="true"></Button>
       <Button :isIconOnly="true" iconName="stats.png" :has-mirror-animation="true"></Button>
@@ -274,6 +292,33 @@ function closeSettings() {
     }
   }
 
+  .you-won {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .you-won__message {
+      color: 1E4652;
+      text-transform: uppercase;
+
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  }
+
+  .you-lost {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .you-lost__message {
+      color: 1E4652;
+      text-transform: uppercase;
+
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  }
   .main {
     display: flex;
     flex-direction: column;
