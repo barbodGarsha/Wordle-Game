@@ -82,15 +82,22 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function createTwoDimArr(rowNum, ColumnNum, initValue) {
+function createTwoDimArr(rowNum, columnNum, initValue) {
   let arr = []
   for(let i = 0; i < rowNum; i++) {
     arr[i] = []
-    for(let j = 0; j < ColumnNum; j++) {
+    for(let j = 0; j < columnNum; j++) {
       arr[i][j] = initValue
     } 
   }
   return arr
+}
+
+function clearRow(rowIndex) {
+  for(let i = 0; i < maxColumnNum.value; i++) {
+    rowValues.value[rowIndex][i] = ''
+    columnIndex.value = 0
+  }
 }
 
 // ---- ACTIONS ----
@@ -143,14 +150,14 @@ document.addEventListener('keydown', (e) => {
   const val = e.key.toUpperCase()
   if(val === "ENTER") {
     
-    if(hardModeEnabled.value) {
-      if(!foundLetters.value.every(i => rowValues.value[rowIndex.value].includes(i))) {
-        alert('HARD MODE')
-        //TODO: clear the row maybe?
-        return
-      }
-    } 
     if(columnIndex.value === maxColumnNum.value) {
+      if(hardModeEnabled.value) {
+        if(!foundLetters.value.every(i => rowValues.value[rowIndex.value].includes(i))) {
+          alert('HARD MODE')        
+          clearRow(rowIndex.value)
+          return
+        }
+      } 
       let columsState = [0, 0, 0, 0, 0]
       let rightAnswers = 0
 
