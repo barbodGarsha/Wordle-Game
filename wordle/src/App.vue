@@ -68,6 +68,7 @@ const hardModeEnabled = ref(false)
 const settingsHidden = ref(true)
 
 // ---- GAME STATE ----
+const isPlaying = ref(true)
 const gameWon = ref(false)
 const gameLost = ref(false)
 
@@ -136,6 +137,7 @@ function newGameInit() {
   
   gameLost.value = false
   gameWon.value = false
+  isPlaying.value = true
 
   // UNFINISHED
   console.log(currentWord)
@@ -148,64 +150,68 @@ function newGameInit() {
 document.addEventListener('keydown', (e) => {
   
   const val = e.key.toUpperCase()
-  if(val === "ENTER") {
-    
-    if(columnIndex.value === maxColumnNum.value) {
-      if(hardModeEnabled.value) {
-        if(!foundLetters.value.every(i => rowValues.value[rowIndex.value].includes(i))) {
-          alert('HARD MODE')        
-          clearRow(rowIndex.value)
-          return
-        }
-      } 
-      let columsState = [0, 0, 0, 0, 0]
-      let rightAnswers = 0
 
-      for(let i = 0; i < 5; i++) {
-        
-        if(currentWord.includes(rowValues.value[rowIndex.value][i])) { 
-          columsState[i] = 1
-          if(!foundLetters.value.includes(rowValues.value[rowIndex.value][i])) {
-            foundLetters.value.push(rowValues.value[rowIndex.value][i])
+  if(isPlaying.value) {
+    if(val === "ENTER") {
+    
+      if(columnIndex.value === maxColumnNum.value) {
+        if(hardModeEnabled.value) {
+          if(!foundLetters.value.every(i => rowValues.value[rowIndex.value].includes(i))) {
+            alert('HARD MODE')        
+            clearRow(rowIndex.value)
+            return
+          }
+        } 
+        let columsState = [0, 0, 0, 0, 0]
+        let rightAnswers = 0
+
+        for(let i = 0; i < 5; i++) {
+          
+          if(currentWord.includes(rowValues.value[rowIndex.value][i])) { 
+            columsState[i] = 1
+            if(!foundLetters.value.includes(rowValues.value[rowIndex.value][i])) {
+              foundLetters.value.push(rowValues.value[rowIndex.value][i])
+            }
+          }
+          if(rowValues.value[rowIndex.value][i] === currentWord[i]) { columsState[i] = 2}
+          
+          if(columsState[i] === 0) {  
+            isWrong.value[rowIndex.value][i] = true
+          }
+          else if(columsState[i] === 1) {
+            isNotRightPos.value[rowIndex.value][i] = true
+          }
+          else if(columsState[i] === 2) {
+            isCorrect.value[rowIndex.value][i] = true
+            rightAnswers++
           }
         }
-        if(rowValues.value[rowIndex.value][i] === currentWord[i]) { columsState[i] = 2}
-        
-        if(columsState[i] === 0) {  
-          isWrong.value[rowIndex.value][i] = true
-        }
-        else if(columsState[i] === 1) {
-          isNotRightPos.value[rowIndex.value][i] = true
-        }
-        else if(columsState[i] === 2) {
-          isCorrect.value[rowIndex.value][i] = true
-          rightAnswers++
-        }
-      }
-      rowIndex.value++
-      columnIndex.value = 0
+        rowIndex.value++
+        columnIndex.value = 0
       if(rightAnswers === 5) {
         gameWon.value = true
+        isPlaying.value = false
       }
       else if(rowIndex.value === maxRowNum.value) {
         gameLost.value = true
+        isPlaying.value = false
       }
     }
-    else {
+    }
+    else if(val === "BACKSPACE") {
+      columnIndex.value--
+      rowValues.value[rowIndex.value][columnIndex.value] = ''
+    }
+    else if(columnIndex.value === maxColumnNum.value) { return }
+    else if(val.length === 1 && (/[A-Z]/).test(val)) {
+      rowValues.value[rowIndex.value][columnIndex.value] = val
+      columnIndex.value++
     }
   }
-  else if(val === "BACKSPACE") {
-    columnIndex.value--
-    rowValues.value[rowIndex.value][columnIndex.value] = ''
-  }
-  else if(val === "ESCAPE") {
+  if(val === "ESCAPE") {
     newGameInit()
   }
-  else if(columnIndex.value === maxColumnNum.value) { return }
-  else if(val.length === 1 && (/[A-Z]/).test(val)) {
-    rowValues.value[rowIndex.value][columnIndex.value] = val
-    columnIndex.value++
-  }
+  
 })
 
 //COOKIES ===============================================================================
