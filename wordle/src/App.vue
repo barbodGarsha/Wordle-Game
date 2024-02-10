@@ -411,7 +411,7 @@ newGameInit()
       justify-content: space-evenly;
       align-items: center;
 
-      width: 15rem;
+      width: 20rem;
       padding: 1rem;
     }
   }
