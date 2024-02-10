@@ -282,7 +282,7 @@ newGameInit()
     </Overlay>
     
     <div class="main__nav">
-      <Button :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+      <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
       <Button @clicked="openSettings" :isIconOnly="true" icon-name="setting.png" :has-rotaion-animation="true"></Button>
       <Button :is-icon-only="true" icon-name="stats.png" :has-mirror-animation="true"></Button>
       <Button :is-icon-only="true" icon-name="help.png" :has-mirror-animation="true"></Button>
