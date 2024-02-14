@@ -72,6 +72,8 @@ const isPlaying = ref(true)
 const gameWon = ref(false)
 const gameLost = ref(false)
 
+let tryCounts = 0
+
 var currentWord = []
 var currentWordString = ""
 
@@ -153,6 +155,9 @@ function newGameInit() {
   gameWon.value = false
   isPlaying.value = true
 
+  tryCounts = 0
+
+  console.log(gamesPlayed.value)
   // UNFINISHED
   console.log(currentWord)
   //const usedWords = getCookie(COOKIE_USEDWORDS)
@@ -176,6 +181,8 @@ document.addEventListener('keydown', (e) => {
             return
           }
         } 
+        tryCounts++
+        if(tryCounts === 1) { gamesPlayed.value++ }
         let columsState = [0, 0, 0, 0, 0]
         let rightAnswers = 0
 
@@ -228,6 +235,10 @@ document.addEventListener('keydown', (e) => {
   
 })
 
+window.onbeforeunload = function() {
+  updateCookies()
+  return null
+}
 //COOKIES ===============================================================================
 const COOKIE_USEDWORDS = "usedWords"
 
@@ -266,10 +277,23 @@ function getCookiesData() {
   bestTry.value  = getCookie(COOKIE_N_BEST_TRY)
 }
 function updateCookies() {
-
+  setCookie(COOKIE_N_GAMES_PLAYED, gamesPlayed.value, 1)
+  setCookie(COOKIE_N_GAMES_WON, gameWon.value, 1)
+  setCookie(COOKIE_N_BEST_STREAK, bestStreak.value, 1)
+  setCookie(COOKIE_N_CURRENT_STREAK, currentStreak.value, 1)
+  setCookie(COOKIE_N_BEST_TRY, bestTry.value, 1)
 }
-getCookiesData()
+
+function resetCookies() {
+  deleteCookie(COOKIE_N_GAMES_PLAYED)
+  deleteCookie(COOKIE_N_GAMES_WON)
+  deleteCookie(COOKIE_N_BEST_STREAK)
+  deleteCookie(COOKIE_N_CURRENT_STREAK)
+  deleteCookie(COOKIE_N_BEST_TRY)
+}
 // MAIN =================================================================================
+
+getCookiesData()
 newGameInit()
 
 </script>
