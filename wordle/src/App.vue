@@ -305,6 +305,32 @@ newGameInit()
 
   <main :class="['main', { 'main--darkmode' : darkModeEnabled }]">
      
+    <Overlay>
+      <div class="stats">
+        <div class="stats__section-1">
+          <div class="stats__box">
+            <p class="stats__box__title">Games Played</p>
+            <p class="stats__box__value">{{ gamesPlayed }}</p>
+          </div>
+          <div class="stats__box">
+            <p class="stats__box__title">Games Won</p>
+            <p class="stats__box__value">{{ gamesWon }}</p>
+          </div>
+          <div class="stats__box">
+            <p class="stats__box__title">Best Streak</p>
+            <p class="stats__box__value">{{ bestStreak }}</p>
+          </div>
+          <div class="stats__box">
+            <p class="stats__box__title">Current Streak</p>
+            <p class="stats__box__value">{{ currentStreak }}</p>
+          </div>
+          <div class="stats__box">
+            <p class="stats__box__title">Best Try</p>
+            <p class="stats__box__value">{{ bestTry }}</p>
+          </div>
+        </div>
+      </div>
+    </Overlay>
     <Overlay @background-clicked="closeSettings" :hidden="settingsHidden">
       <div class="settings">
         <div class="settings__section">
@@ -508,6 +534,49 @@ newGameInit()
 
       width: 100%;
     }
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 2rem;
+    
+    height: 100%;
+    width: 100%;
+
+    .stats__section-1 {
+      display: flex;
+      justify-content: center;
+      flex-wrap:  wrap;
+      .stats__box {
+        background-color: #ffffff;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        border-radius: 15px;
+        padding: 1rem;
+        margin: .5rem;
+        width: 40%;
+
+        .stats__box__title {
+          color: 1E4652;
+          font-size: 1.2rem;
+          font-weight: 500;
+        }
+
+        .stats__box__value {
+          color: 1E4652;
+          font-size: 1.2rem;
+          font-weight: 500;
+        }
+      }
+    }
+
   }
 
   .main {
