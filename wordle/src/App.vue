@@ -75,6 +75,19 @@ const gameLost = ref(false)
 var currentWord = []
 var currentWordString = ""
 
+// ---- COOKIES ----
+const COOKIE_N_GAMES_PLAYED = "gamesPlayed"
+const COOKIE_N_GAMES_WON = "gamesWon"
+const COOKIE_N_BEST_STREAK = "bestStreak"
+const COOKIE_N_CURRENT_STREAK = "currentStreak"
+const COOKIE_N_BEST_TRY = "bestTry"
+
+const gamesPlayed = ref(0)
+const gamesWon = ref(0)
+const bestStreak = ref(0)
+const currentStreak = ref(0)
+const bestTry = ref(0)
+
 //FUNCTIONS =============================================================================
 
 // ---- TOOLS ----
@@ -245,7 +258,17 @@ function deleteCookie(cookieName) {
   document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+function getCookiesData() {
+  gamesPlayed.value = getCookie(COOKIE_N_GAMES_PLAYED)
+  gamesWon.value = getCookie(COOKIE_N_GAMES_WON)
+  bestStreak.value = getCookie(COOKIE_N_BEST_STREAK)
+  currentStreak.value = getCookie(COOKIE_N_CURRENT_STREAK)
+  bestTry.value  = getCookie(COOKIE_N_BEST_TRY)
+}
+function updateCookies() {
 
+}
+getCookiesData()
 // MAIN =================================================================================
 newGameInit()
 
