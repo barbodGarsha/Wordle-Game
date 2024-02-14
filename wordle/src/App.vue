@@ -73,6 +73,7 @@ const gameWon = ref(false)
 const gameLost = ref(false)
 
 var currentWord = []
+var currentWordString = ""
 
 //FUNCTIONS =============================================================================
 
@@ -119,8 +120,8 @@ function closeSettings() {
 }
 
 function newGameInit() {
-  const newWord = words[getRandomInt(0, words.length - 1)].toUpperCase()
-  const newWordArr = [...newWord]
+  currentWordString = words[getRandomInt(0, words.length - 1)].toUpperCase()
+  const newWordArr = [...currentWordString]
 
   for(let i = 0; i < 5; i++) {
     currentWord[i] = newWordArr[i]
@@ -271,13 +272,25 @@ newGameInit()
 
     <Overlay :hidden="!gameWon">
       <div class="you-won">
-        <p class="you-won__message">You Won</p>
+        <div class="you-won__info">
+          <p class="you-won__message">You Won</p>
+          <p class="you-won__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
+        </div>
+        <div class="you-won__nav">
+          <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+        </div>
       </div>
     </Overlay>
 
     <Overlay :hidden="!gameLost">
       <div class="you-lost">
-        <p class="you-lost__message">You Lost</p>
+        <div class="you-lost__info">
+          <p class="you-lost__message">You Lost</p>  
+          <p class="you-lost__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
+        </div>
+        <div class="you-lost__nav">
+          <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+        </div>
       </div>
     </Overlay>
     
@@ -368,29 +381,83 @@ newGameInit()
 
   .you-won {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 
-    .you-won__message {
-      color: 1E4652;
-      text-transform: uppercase;
+    padding: 2rem;
+    
+    height: 100%;
+    width: 100%;
 
-      font-size: 3rem;
-      font-weight: bold;
+    .you-won__info {  
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  
+      .you-won__message {
+        color: 1E4652;
+        text-transform: uppercase;
+
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      .you-won__the-word {
+        color: #1E4652;
+
+        font-size: 2.9rem;
+      }
+    }
+
+    .you-won__nav {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      width: 100%;
     }
   }
 
   .you-lost {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 
-    .you-lost__message {
-      color: 1E4652;
-      text-transform: uppercase;
+    padding: 2rem;
+    
+    height: 100%;
+    width: 100%;
 
-      font-size: 3rem;
-      font-weight: bold;
+    .you-lost__info {  
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  
+      .you-lost__message {
+        color: 1E4652;
+        text-transform: uppercase;
+
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      .you-lost__the-word {
+        color: #1E4652;
+
+        font-size: 2.9rem;
+      }
+    }
+
+    .you-lost__nav {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      width: 100%;
     }
   }
 
