@@ -326,7 +326,7 @@ newGameInit()
           </div>
           <div class="stats__box">
             <p class="stats__box__title">Best Try</p>
-            <p class="stats__box__value">{{ bestTry }}</p>
+            <p class="stats__box__value">{{ /* TODO: Conditional rendering for this one  */ bestTry }}</p>
           </div>
         </div>
       </div>
