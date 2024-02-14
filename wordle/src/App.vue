@@ -210,6 +210,7 @@ document.addEventListener('keydown', (e) => {
         rowIndex.value++
         columnIndex.value = 0
       if(rightAnswers === 5) {
+        gamesWon.value++
         gameWon.value = true
         isPlaying.value = false
       }
@@ -285,14 +286,15 @@ function updateCookies() {
 }
 
 function resetCookies() {
-  deleteCookie(COOKIE_N_GAMES_PLAYED)
-  deleteCookie(COOKIE_N_GAMES_WON)
-  deleteCookie(COOKIE_N_BEST_STREAK)
-  deleteCookie(COOKIE_N_CURRENT_STREAK)
-  deleteCookie(COOKIE_N_BEST_TRY)
+  setCookie(COOKIE_N_GAMES_PLAYED, 0, 1)
+  setCookie(COOKIE_N_GAMES_WON, 0, 1)
+  setCookie(COOKIE_N_BEST_STREAK, 0, 1)
+  setCookie(COOKIE_N_CURRENT_STREAK, 0, 1)
+  setCookie(COOKIE_N_BEST_TRY, maxRowNum.value + 1, 1)
 }
 // MAIN =================================================================================
 
+resetCookies()
 getCookiesData()
 newGameInit()
 
