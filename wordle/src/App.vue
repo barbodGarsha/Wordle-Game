@@ -85,12 +85,15 @@ const COOKIE_N_GAMES_WON = "gamesWon"
 const COOKIE_N_BEST_STREAK = "bestStreak"
 const COOKIE_N_CURRENT_STREAK = "currentStreak"
 const COOKIE_N_BEST_TRY = "bestTry"
+const COOKIE_USED_WORDS = "usedWords"
 
 const gamesPlayed = ref(0)
 const gamesWon = ref(0)
 const bestStreak = ref(0)
 const currentStreak = ref(0)
 const bestTry = ref(0)
+
+let usedWords = []
 
 //FUNCTIONS =============================================================================
 
@@ -171,12 +174,7 @@ function newGameInit() {
 
   tryCounts = 0
 
-  console.log(gamesPlayed.value)
-  // UNFINISHED
   console.log(currentWord)
-  //const usedWords = getCookie(COOKIE_USEDWORDS)
-  //setCookie(COOKIE_USEDWORDS, usedWords + ", " + newWord, 1)
-  //console.log(getCookie(COOKIE_USEDWORDS))
 }
 
 //EVENTS ================================================================================
@@ -224,6 +222,7 @@ document.addEventListener('keydown', (e) => {
         rowIndex.value++
         columnIndex.value = 0
         if(rightAnswers === 5) {
+          usedWords.push(currentWordString)
           gamesWon.value++
           currentStreak.value++
           if(bestStreak.value < currentStreak.value) { bestStreak.value = currentStreak.value }
@@ -234,6 +233,7 @@ document.addEventListener('keydown', (e) => {
             bestTry.value = rowIndex.value }
         }
         else if(rowIndex.value === maxRowNum.value) {
+          usedWords.push(currentWordString)
           gameLost.value = true
           isPlaying.value = false
           currentStreak.value = 0
@@ -296,6 +296,8 @@ function getCookiesData() {
   bestStreak.value = getCookie(COOKIE_N_BEST_STREAK)
   currentStreak.value = getCookie(COOKIE_N_CURRENT_STREAK)
   bestTry.value  = getCookie(COOKIE_N_BEST_TRY)
+
+  usedWords = JSON.parse(getCookie(COOKIE_USED_WORDS))
 }
 function updateCookies() {
   setCookie(COOKIE_N_GAMES_PLAYED, gamesPlayed.value, 1)
@@ -303,6 +305,8 @@ function updateCookies() {
   setCookie(COOKIE_N_BEST_STREAK, bestStreak.value, 1)
   setCookie(COOKIE_N_CURRENT_STREAK, currentStreak.value, 1)
   setCookie(COOKIE_N_BEST_TRY, bestTry.value, 1)
+
+  setCookie(COOKIE_USED_WORDS, JSON.stringify({...usedWords}))
 }
 
 function resetCookies() {
@@ -311,6 +315,8 @@ function resetCookies() {
   setCookie(COOKIE_N_BEST_STREAK, 0, 1)
   setCookie(COOKIE_N_CURRENT_STREAK, 0, 1)
   setCookie(COOKIE_N_BEST_TRY, maxRowNum.value + 1, 1)
+
+  setCookie(COOKIE_USED_WORDS, JSON.stringify([]), 1)
 }
 // MAIN =================================================================================
 
