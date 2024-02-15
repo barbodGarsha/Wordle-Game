@@ -152,7 +152,20 @@ function closeStats() {
 }
 
 function newGameInit() {
+  
+  // TODO: DELETE THIS AFTER THE CODE BELOW IS FINISHED
   currentWordString = words[getRandomInt(0, words.length - 1)].toUpperCase()
+  
+  /* NOTE: till we have made sure that the game knows when all the words have been used and it resets itself this code should not be enabled
+  
+  while(true) {
+    currentWordString = words[getRandomInt(0, words.length - 1)].toUpperCase()
+    if(usedWords.includes(currentWordString)) { continue }
+    break
+  }
+  
+  */
+   
   const newWordArr = [...currentWordString]
 
   for(let i = 0; i < 5; i++) {
