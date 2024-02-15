@@ -130,18 +130,22 @@ function hardModeChanged(state) {
 
 function openSettings () {
   settingsHidden.value = false
+  isPlaying.value = false
 }
 
 function closeSettings() {
   settingsHidden.value = true
+  isPlaying.value = true
 }
 
 function oepnStats() {
   statsHidden.value = false
+  isPlaying.value = false
 }
 
 function closeStats() {
   statsHidden.value = true
+  isPlaying.value = true
 }
 
 function newGameInit() {
