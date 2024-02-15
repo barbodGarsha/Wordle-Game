@@ -219,16 +219,22 @@ document.addEventListener('keydown', (e) => {
         }
         rowIndex.value++
         columnIndex.value = 0
-      if(rightAnswers === 5) {
-        gamesWon.value++
-        gameWon.value = true
-        isPlaying.value = false
+        if(rightAnswers === 5) {
+          gamesWon.value++
+          currentStreak.value++
+          if(bestStreak.value < currentStreak.value) { bestStreak.value = currentStreak.value }
+          gameWon.value = true
+          isPlaying.value = false
+
+          if(bestTry.value > rowIndex.value) {
+            bestTry.value = rowIndex.value }
+        }
+        else if(rowIndex.value === maxRowNum.value) {
+          gameLost.value = true
+          isPlaying.value = false
+          currentStreak.value = 0
+        }
       }
-      else if(rowIndex.value === maxRowNum.value) {
-        gameLost.value = true
-        isPlaying.value = false
-      }
-    }
     }
     else if(val === "BACKSPACE") {
       columnIndex.value--
