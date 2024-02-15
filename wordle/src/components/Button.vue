@@ -66,7 +66,7 @@ function clicked() {
     }
     .btn--has-rotation-animation:hover {
         .btn__icon {
-            transform: rotate(180deg);
+            transform: rotate(-180deg);
         }
     }
     .btn--has-mirror-animation:hover {
