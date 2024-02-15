@@ -42,6 +42,8 @@ watch(() => [props.isCorrect, props.isNotRightPos, props.isWrong], ([isCorrect, 
         justify-content: center;
         align-items: center;
 
+        border-radius: 15px;
+
         border: solid 2px white;
         width: 5rem;
         height: 5rem;
@@ -49,6 +51,7 @@ watch(() => [props.isCorrect, props.isNotRightPos, props.isWrong], ([isCorrect, 
         .column__input {
             color: #1E4652;
             font-size: 2rem;
+            font-weight: 500;
         }   
     }
     .column--correct {

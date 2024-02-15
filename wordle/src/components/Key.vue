@@ -36,6 +36,8 @@ function onClick(e) {
     justify-content: center;
     align-items: center;
 
+    border-radius: 15px;
+
     border: solid 2px white;
 
     width: 5rem;
@@ -43,6 +45,7 @@ function onClick(e) {
 
     .key__p {
         font-size: 2rem;
+        font-weight: 500;
     }   
 }
 .key--long {
