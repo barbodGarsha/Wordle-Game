@@ -65,12 +65,14 @@ isNotRightPos.value = createTwoDimArr(maxRowNum.value, maxColumnNum, false)
 // ---- SETTINGS ----
 const darkModeEnabled = ref(false)
 const hardModeEnabled = ref(false)
-const settingsHidden = ref(true)
 
 // ---- GAME STATE ----
 const isPlaying = ref(true)
 const gameWon = ref(false)
 const gameLost = ref(false)
+
+const settingsHidden = ref(true)
+const statsHidden = ref(true)
 
 let tryCounts = 0
 
@@ -132,6 +134,14 @@ function openSettings () {
 
 function closeSettings() {
   settingsHidden.value = true
+}
+
+function oepnStats() {
+  statsHidden.value = false
+}
+
+function closeStats() {
+  statsHidden.value = true
 }
 
 function newGameInit() {
@@ -305,7 +315,7 @@ newGameInit()
 
   <main :class="['main', { 'main--darkmode' : darkModeEnabled }]">
      
-    <Overlay>
+    <Overlay :hidden="statsHidden" @background-clicked="closeStats">
       <div class="stats">
         <div class="stats__section-1">
           <div class="stats__box">
@@ -331,6 +341,7 @@ newGameInit()
         </div>
       </div>
     </Overlay>
+
     <Overlay @background-clicked="closeSettings" :hidden="settingsHidden">
       <div class="settings">
         <div class="settings__section">
@@ -372,7 +383,7 @@ newGameInit()
     <div class="main__nav">
       <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
       <Button @clicked="openSettings" :isIconOnly="true" icon-name="setting.png" :has-rotaion-animation="true"></Button>
-      <Button :is-icon-only="true" icon-name="stats.png" :has-mirror-animation="true"></Button>
+      <Button @clicked="oepnStats" :is-icon-only="true" icon-name="stats.png" :has-mirror-animation="true"></Button>
       <Button :is-icon-only="true" icon-name="help.png" :has-mirror-animation="true"></Button>
     </div>
 
