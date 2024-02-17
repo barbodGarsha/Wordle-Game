@@ -153,18 +153,16 @@ function closeStats() {
 
 function newGameInit() {
   
-  // TODO: DELETE THIS AFTER THE CODE BELOW IS FINISHED
-  currentWordString = words[getRandomInt(0, words.length - 1)].toUpperCase()
-  
-  /* NOTE: till we have made sure that the game knows when all the words have been used and it resets itself this code should not be enabled
-  
+  if(usedWords.length === words.length) {
+    alert("Congrats, you have finished our database of words :)")
+    usedWords = []
+    updateCookies()
+  }
   while(true) {
     currentWordString = words[getRandomInt(0, words.length - 1)].toUpperCase()
     if(usedWords.includes(currentWordString)) { continue }
     break
   }
-  
-  */
    
   const newWordArr = [...currentWordString]
 
@@ -319,7 +317,7 @@ function updateCookies() {
   setCookie(COOKIE_N_CURRENT_STREAK, currentStreak.value, 1)
   setCookie(COOKIE_N_BEST_TRY, bestTry.value, 1)
 
-  setCookie(COOKIE_USED_WORDS, JSON.stringify({...usedWords}))
+  setCookie(COOKIE_USED_WORDS, JSON.stringify({...usedWords}), 1)
 }
 
 function resetCookies() {
