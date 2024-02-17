@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue'
 
-import TheHeader from './components/TheHeader.vue'
-import Column from './components/Column.vue'
-import Row from './components/Row.vue'
-import Keyboard from './components/Keyboard.vue'
-import Button from './components/Button.vue'
-import Overlay from './components/Overlay.vue'
-import ToggleButton from './components/ToggleButton.vue'
+import TheHeader from '@/components/TheHeader.vue'
+import Column from '@/components/Column.vue'
+import Row from '@/components/Row.vue'
+import Keyboard from '@/components/Keyboard.vue'
+import Button from '@/components/Button.vue'
+import Overlay from '@/components/Overlay.vue'
+import ToggleButton from '@/components/ToggleButton.vue'
 
 //WORDS:
 const words = [
