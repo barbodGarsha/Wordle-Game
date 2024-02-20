@@ -338,93 +338,95 @@ newGameInit()
 </script>
 
 <template>
-  <TheHeader :dark-mode="darkModeEnabled"></TheHeader>
+  <div id="app">
+    <TheHeader :dark-mode="darkModeEnabled"></TheHeader>
 
-  <main :class="['main', { 'main--darkmode' : darkModeEnabled }]">
-     
-    <Overlay :hidden="statsHidden" @background-clicked="closeStats">
-      <div class="stats">
-        <div class="stats__section-1">
-          <div class="stats__box">
-            <p class="stats__box__title">Games Played</p>
-            <p class="stats__box__value">{{ gamesPlayed }}</p>
-          </div>
-          <div class="stats__box">
-            <p class="stats__box__title">Games Won</p>
-            <p class="stats__box__value">{{ gamesWon }}</p>
-          </div>
-          <div class="stats__box">
-            <p class="stats__box__title">Best Streak</p>
-            <p class="stats__box__value">{{ bestStreak }}</p>
-          </div>
-          <div class="stats__box">
-            <p class="stats__box__title">Current Streak</p>
-            <p class="stats__box__value">{{ currentStreak }}</p>
-          </div>
-          <div class="stats__box">
-            <p class="stats__box__title">Best Try</p>
-            <p class="stats__box__value">{{ /* TODO: Conditional rendering for this one  */ bestTry }}</p>
+    <main :class="['main', { 'main--darkmode' : darkModeEnabled }]">
+      
+      <Overlay :hidden="statsHidden" @background-clicked="closeStats">
+        <div class="stats">
+          <div class="stats__section-1">
+            <div class="stats__box">
+              <p class="stats__box__title">Games Played</p>
+              <p class="stats__box__value">{{ gamesPlayed }}</p>
+            </div>
+            <div class="stats__box">
+              <p class="stats__box__title">Games Won</p>
+              <p class="stats__box__value">{{ gamesWon }}</p>
+            </div>
+            <div class="stats__box">
+              <p class="stats__box__title">Best Streak</p>
+              <p class="stats__box__value">{{ bestStreak }}</p>
+            </div>
+            <div class="stats__box">
+              <p class="stats__box__title">Current Streak</p>
+              <p class="stats__box__value">{{ currentStreak }}</p>
+            </div>
+            <div class="stats__box">
+              <p class="stats__box__title">Best Try</p>
+              <p class="stats__box__value">{{ /* TODO: Conditional rendering for this one  */ bestTry }}</p>
+            </div>
           </div>
         </div>
+      </Overlay>
+
+      <Overlay @background-clicked="closeSettings" :hidden="settingsHidden">
+        <div class="settings">
+          <div class="settings__section">
+            <p class="settings__section__p">Dark Mode</p>  
+            <ToggleButton @toggled="darkModeChanged"></ToggleButton>
+          </div>
+          
+          <div class="settings__section">
+            <p class="settings__section__p">Hard Mode</p>  
+            <ToggleButton @toggled="hardModeChanged"></ToggleButton>
+          </div>
+        </div>
+      </Overlay>
+
+      <Overlay :hidden="!gameWon">
+        <div class="you-won">
+          <div class="you-won__info">
+            <p class="you-won__message">You Won</p>
+            <p class="you-won__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
+          </div>
+          <div class="you-won__nav">
+            <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+          </div>
+        </div>
+      </Overlay>
+
+      <Overlay :hidden="!gameLost">
+        <div class="you-lost">
+          <div class="you-lost__info">
+            <p class="you-lost__message">You Lost</p>  
+            <p class="you-lost__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
+          </div>
+          <div class="you-lost__nav">
+            <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+          </div>
+        </div>
+      </Overlay>
+      
+      <div class="main__nav">
+        <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+        <Button @clicked="openSettings" :isIconOnly="true" icon-name="setting.png" :has-rotaion-animation="true"></Button>
+        <Button @clicked="oepnStats" :is-icon-only="true" icon-name="stats.png" :has-mirror-animation="true"></Button>
+        <Button :is-icon-only="true" icon-name="help.png" :has-mirror-animation="true"></Button>
       </div>
-    </Overlay>
 
-    <Overlay @background-clicked="closeSettings" :hidden="settingsHidden">
-      <div class="settings">
-        <div class="settings__section">
-          <p class="settings__section__p">Dark Mode</p>  
-          <ToggleButton @toggled="darkModeChanged"></ToggleButton>
-        </div>
-        
-        <div class="settings__section">
-          <p class="settings__section__p">Hard Mode</p>  
-          <ToggleButton @toggled="hardModeChanged"></ToggleButton>
-        </div>
+      <div class="main__section">
+        <Row v-for="i in maxRowNum">
+          <Column v-for="j in maxColumnNum" :value="rowValues[i - 1][j - 1]" :isCorrect="isCorrect[i - 1][j - 1]" :isNotRightPos="isNotRightPos[i - 1][j - 1]" :isWrong="isWrong[i - 1][j - 1]"></Column>
+        </Row>
       </div>
-    </Overlay>
-
-    <Overlay :hidden="!gameWon">
-      <div class="you-won">
-        <div class="you-won__info">
-          <p class="you-won__message">You Won</p>
-          <p class="you-won__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
-        </div>
-        <div class="you-won__nav">
-          <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
-        </div>
+      
+      <div class="main__section">
+        <Keyboard></Keyboard>
       </div>
-    </Overlay>
 
-    <Overlay :hidden="!gameLost">
-      <div class="you-lost">
-        <div class="you-lost__info">
-          <p class="you-lost__message">You Lost</p>  
-          <p class="you-lost__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
-        </div>
-        <div class="you-lost__nav">
-          <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
-        </div>
-      </div>
-    </Overlay>
-    
-    <div class="main__nav">
-      <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
-      <Button @clicked="openSettings" :isIconOnly="true" icon-name="setting.png" :has-rotaion-animation="true"></Button>
-      <Button @clicked="oepnStats" :is-icon-only="true" icon-name="stats.png" :has-mirror-animation="true"></Button>
-      <Button :is-icon-only="true" icon-name="help.png" :has-mirror-animation="true"></Button>
-    </div>
-
-    <div class="main__section">
-      <Row v-for="i in maxRowNum">
-        <Column v-for="j in maxColumnNum" :value="rowValues[i - 1][j - 1]" :isCorrect="isCorrect[i - 1][j - 1]" :isNotRightPos="isNotRightPos[i - 1][j - 1]" :isWrong="isWrong[i - 1][j - 1]"></Column>
-      </Row>
-    </div>
-    
-    <div class="main__section">
-      <Keyboard></Keyboard>
-    </div>
-
-</main>
+    </main> 
+  </div>
 </template>
 
 <style lang="scss">
