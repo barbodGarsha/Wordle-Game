@@ -1,6 +1,5 @@
 <script setup>
 
-const ICONS_FOLDER_PATH = '../assets/icons/'
 const emit = defineEmits(['clicked'])
 
 const props = defineProps ({
@@ -8,9 +7,9 @@ const props = defineProps ({
         default: false,
         type: Boolean
     },
-    iconName: {
-        default: '',
-        type: String
+    icon: {
+        default: null,
+        type: Image
     },
     hasRotaionAnimation: {
         default: false,
@@ -22,9 +21,6 @@ const props = defineProps ({
     }
 })
 
-function getImageUrl() {
-  return new URL(ICONS_FOLDER_PATH + props.iconName, import.meta.url)
-}
 
 function clicked() {
     emit('clicked')
@@ -34,7 +30,7 @@ function clicked() {
 
 <template>
     <div @click="clicked" :class="['btn', {'btn--has-rotation-animation' : props.hasRotaionAnimation}, {'btn--has-mirror-animation' : props.hasMirrorAnimation}]">
-        <img v-if="props.isIconOnly" :src="getImageUrl()" alt="icon" class="btn__icon">
+        <img v-if="props.isIconOnly" :src="props.icon" alt="icon" class="btn__icon">
     </div>
 </template>
 

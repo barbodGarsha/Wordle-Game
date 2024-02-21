@@ -9,6 +9,11 @@ import Button from '@/components/Button.vue'
 import Overlay from '@/components/Overlay.vue'
 import ToggleButton from '@/components/ToggleButton.vue'
 
+import iconHelp from '@/assets/icons/help.png'
+import iconRestart from '@/assets/icons/restart.png'
+import iconSetting from '@/assets/icons/setting.png'
+import iconStats from '@/assets/icons/stats.png'
+
 //WORDS:
 const words = [
     "Latch", "Braid", "Snack", "Amber", "Swirl",
@@ -43,6 +48,7 @@ const words = [
   ]
 
 //GLOBALS ================================================================================
+const ICONS_FOLDER_PATH = '../assets/icons/'
 
 // ---- BOARD ----
 const maxColumnNum = ref(5)
@@ -409,10 +415,10 @@ newGameInit()
       </Overlay>
       
       <div class="main__nav">
-        <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
-        <Button @clicked="openSettings" :isIconOnly="true" icon-name="setting.png" :has-rotaion-animation="true"></Button>
-        <Button @clicked="oepnStats" :is-icon-only="true" icon-name="stats.png" :has-mirror-animation="true"></Button>
-        <Button :is-icon-only="true" icon-name="help.png" :has-mirror-animation="true"></Button>
+        <Button @clicked="newGameInit" :is-icon-only="true" :icon="iconRestart" :has-rotaion-animation="true"></Button>
+        <Button @clicked="openSettings" :isIconOnly="true" :icon="iconSetting" :has-rotaion-animation="true"></Button>
+        <Button @clicked="oepnStats" :is-icon-only="true" :icon="iconStats" :has-mirror-animation="true"></Button>
+        <Button :is-icon-only="true" :icon="iconHelp" :has-mirror-animation="true"></Button>
       </div>
 
       <div class="main__section">
