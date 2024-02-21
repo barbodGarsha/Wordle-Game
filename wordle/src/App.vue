@@ -368,13 +368,20 @@ newGameInit()
               <p class="stats__box__title">Current Streak</p>
               <p class="stats__box__value">{{ currentStreak }}</p>
             </div>
+            <div class="stats__box">
+              <p class="stats__box__title">Best Try</p>
+              <p class="stats__box__value">{{ /* TODO: Conditional rendering for this one  */ bestTry }}</p>
+            </div>
           </div>
         </div>
       </Overlay>
 
       <Overlay @background-clicked="closeSettings" :hidden="settingsHidden">
         <div class="settings">
-          
+          <div class="settings__section">
+            <p class="settings__section__p">Dark Mode</p>  
+            <ToggleButton @toggled="darkModeChanged"></ToggleButton>
+          </div>
           
           <div class="settings__section">
             <p class="settings__section__p">Hard Mode</p>  
@@ -411,7 +418,7 @@ newGameInit()
         <Button @clicked="newGameInit" :is-icon-only="true" :icon="iconRestart" :has-rotaion-animation="true"></Button>
         <Button @clicked="openSettings" :isIconOnly="true" :icon="iconSetting" :has-rotaion-animation="true"></Button>
         <Button @clicked="oepnStats" :is-icon-only="true" :icon="iconStats" :has-mirror-animation="true"></Button>
-       
+        <Button :is-icon-only="true" :icon="iconHelp" :has-mirror-animation="true"></Button>
       </div>
 
       <div class="main__section">
