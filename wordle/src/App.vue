@@ -190,8 +190,6 @@ function newGameInit() {
   isPlaying.value = true
 
   tryCounts = 0
-
-  console.log(currentWord)
 }
 
 //EVENTS ================================================================================
