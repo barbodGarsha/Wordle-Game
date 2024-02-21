@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && git add dist -f && git commit -am \"Build and Deploy\" && cd .. && git subtree push --prefix wordle/dist origin deploy"
   },
   "dependencies": {
     "sass": "^1.69.7",

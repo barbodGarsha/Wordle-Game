@@ -13,5 +13,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: '/Wordle-Game/'
+  base: '/Wordle-Game/tree/deploy/'
 })
