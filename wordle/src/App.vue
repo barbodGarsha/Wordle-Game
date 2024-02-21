@@ -380,7 +380,7 @@ newGameInit()
           </div>
         </div>
       </Overlay>
-
+ 
       <Overlay :hidden="!gameWon">
         <div class="you-won">
           <div class="you-won__info">
