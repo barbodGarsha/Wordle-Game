@@ -388,7 +388,7 @@ newGameInit()
             <p class="you-won__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
           </div>
           <div class="you-won__nav">
-            <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+            <Button @clicked="newGameInit" :is-icon-only="true" :icon="iconRestart" :has-rotaion-animation="true"></Button>
           </div>
         </div>
       </Overlay>
@@ -400,7 +400,7 @@ newGameInit()
             <p class="you-lost__the-word"> The Word:&nbsp;{{ currentWordString }}</p>
           </div>
           <div class="you-lost__nav">
-            <Button @clicked="newGameInit" :is-icon-only="true" icon-name="restart.png" :has-rotaion-animation="true"></Button>
+            <Button @clicked="newGameInit" :is-icon-only="true" :icon="iconRestart" :has-rotaion-animation="true"></Button>
           </div>
         </div>
       </Overlay>
